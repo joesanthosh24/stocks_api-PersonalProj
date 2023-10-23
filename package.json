@@ -4,7 +4,8 @@
   "description": "Real Time Stocks Websocket app",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app"
   },
   "repository": {
     "type": "git",
@@ -15,5 +16,12 @@
   "bugs": {
     "url": "https://github.com/joesanthosh24/socketio-stocks/issues"
   },
-  "homepage": "https://github.com/joesanthosh24/socketio-stocks#readme"
+  "homepage": "https://github.com/joesanthosh24/socketio-stocks#readme",
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.7.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
 }
