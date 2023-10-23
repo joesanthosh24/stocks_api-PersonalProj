@@ -1,0 +1,19 @@
+{
+  "name": "stocks_socketapp",
+  "version": "1.0.0",
+  "description": "Real Time Stocks Websocket app",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joesanthosh24/socketio-stocks.git"
+  },
+  "author": "Joe Santhosh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joesanthosh24/socketio-stocks/issues"
+  },
+  "homepage": "https://github.com/joesanthosh24/socketio-stocks#readme"
+}
