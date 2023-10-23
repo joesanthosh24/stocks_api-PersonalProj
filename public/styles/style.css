@@ -1,0 +1,42 @@
+.stocksContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.stockContainer {
+  padding-right: 15px;
+  margin-right: 5px;
+  border-right: 1px solid gray;
+  width: 431px;
+  height: 75vh;
+  margin-bottom: 20px;
+  overflow: auto;
+}
+
+.stockContainer::-webkit-scrollbar {
+  width: 10px;
+}
+
+.stockContainer::-webkit-scrollbar-thumb {
+  background-color: #888;
+}
+
+.stock-price {
+  list-style: none;
+  padding: 5px;
+  margin-bottom: 10px;
+  background-color: #eee;
+  border: 1px solid #000;
+}
+
+.stock-value {
+  font-weight: bold;
+}
+
+.btn {
+  background-color: #c44545;
+  padding: 10px;
+  border: 1px solid #c44545;
+  border-radius: 8px;
+}

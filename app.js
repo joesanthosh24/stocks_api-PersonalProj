@@ -6,14 +6,40 @@ const { Server } = require("socket.io");
 const server = http.createServer(app);
 const io = new Server(server);
 
-const stock_tickers = ["NDAQ", "DIJA", "SPX"];
+app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
+  res.sendFile(__dirname + "/views/index.html");
 });
 
 io.on("connection", (socket) => {
   console.log("Connected");
+  const interval = setInterval(() => {
+    const ndaqStock = (Math.random() * 899999999).toFixed(2);
+    const djiaStock = (Math.random() * 899999999).toFixed(2);
+    const spxStock = (Math.random() * 899999999).toFixed(2);
+
+    socket.emit("price_update", {
+      time: new Date().toLocaleDateString("en-us", {
+        weekday: "long",
+        year: "numeric",
+        month: "short",
+        day: "numeric",
+        hour: "2-digit",
+        minute: "2-digit",
+        second: "2-digit",
+      }),
+      stocks: [
+        { ticker: "NDAQ", price: ndaqStock },
+        { ticker: "DJIA", price: djiaStock },
+        { ticker: "SPX", price: spxStock },
+      ],
+    });
+  }, 1000);
+  socket.on("disconnect", () => {
+    console.log("User Disconnected");
+    clearInterval(interval);
+  });
 });
 
 server.listen(3000, () => {

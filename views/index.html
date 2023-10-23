@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Real Time Stocks</title>
+    <link rel="stylesheet" href="/styles/style.css" />
   </head>
   <body>
     <h1>Real Time Stock Updates</h1>
@@ -21,9 +22,31 @@
         <ul class="prices"></ul>
       </div>
     </div>
+    <button class="btn">Disconnect</button>
     <script src="/socket.io/socket.io.js"></script>
     <script>
       var socket = io();
+
+      socket.on("price_update", (data) => {
+        const { stocks, time } = data;
+
+        for (let i = 0; i < stocks.length; i++) {
+          const { price, ticker } = stocks[i];
+
+          const li = document.createElement("li");
+          li.className = "stock-price";
+          li.innerHTML = `At ${time}: <span class='stock-value'>$${price}</span>`;
+
+          const ul = document.querySelector(
+            `.stockContainer#${ticker} .prices`
+          );
+          ul.appendChild(li);
+        }
+      });
+
+      document.querySelector(".btn").addEventListener("click", () => {
+        socket.disconnect();
+      });
     </script>
   </body>
 </html>
