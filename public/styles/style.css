@@ -35,8 +35,25 @@
 }
 
 .btn {
-  background-color: #c44545;
+  background-color: #171795;
   padding: 10px;
-  border: 1px solid #c44545;
+  border: 1px solid #171795;
   border-radius: 8px;
+  color: #fff;
+}
+
+.btn-danger {
+  background-color: #c44545;
+  border: 1px solid #c44545;
+}
+
+.btn-success {
+  background-color: #41e259;
+  border: 1px solid #41e259;
+}
+
+.btn.disabled {
+  background-color: #eee;
+  border-color: #eee;
+  color: #898686;
 }
