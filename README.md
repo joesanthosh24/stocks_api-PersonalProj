@@ -6,3 +6,5 @@ Uses the following:
 - Node.js
 - Express.js
 - Websockets
+
+Docker Image hosted @https://hub.docker.com/repository/docker/joesanthosh/stocks-api/general
