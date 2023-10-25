@@ -12,9 +12,30 @@ app.use(express.static("public"));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+const stocks = [
+  { ticker: "NDAQ", name: "Nasdaq" },
+  { ticker: "DJIA", name: "Dow Jones Industrial Average" },
+  { ticker: "SPX", name: "S&P 500 Index" },
+];
+
 app.get("/", (req, res) => {
   res.render("index", {
     pageTitle: "Real Time Stocks",
+    stocks,
+  });
+});
+
+app.get("/stocks/:ticker", (req, res) => {
+  const { ticker } = req.params;
+
+  const { ticker: stockTicker, name } = stocks.filter(
+    (stock) => stock.ticker === ticker
+  )[0];
+
+  res.render("stock", {
+    pageTitle: name + " Stock",
+    stockName: name,
+    ticker: stockTicker,
   });
 });
 
