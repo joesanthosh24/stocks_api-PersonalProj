@@ -20,10 +20,15 @@ app.get("/", (req, res) => {
 
 io.on("connection", (socket) => {
   console.log("Connected");
+
+  const formatAsPrice = (val) => {
+    return val.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
   const interval = setInterval(() => {
-    const ndaqStock = (Math.random() * 899999999).toFixed(2);
-    const djiaStock = (Math.random() * 899999999).toFixed(2);
-    const spxStock = (Math.random() * 899999999).toFixed(2);
+    const ndaqStock = formatAsPrice(Math.random() * 899999999);
+    const djiaStock = formatAsPrice(Math.random() * 899999999);
+    const spxStock = formatAsPrice(Math.random() * 899999999);
 
     socket.emit("price_update", {
       time: new Date().toLocaleDateString("en-us", {
