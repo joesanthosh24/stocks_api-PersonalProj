@@ -2,14 +2,18 @@ const express = require("express");
 const app = express();
 const http = require("http");
 const { Server } = require("socket.io");
+const path = require("path");
 
 const server = http.createServer(app);
 const io = new Server(server);
 
 app.use(express.static("public"));
 
+app.set("views", path.join(__dirname, "views"));
+app.set("view engine", "ejs");
+
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/views/index.html");
+  res.render("index");
 });
 
 io.on("connection", (socket) => {
