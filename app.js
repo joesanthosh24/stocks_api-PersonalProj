@@ -12,16 +12,44 @@ app.use(express.static("public"));
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
 
+const stocks = [
+  { ticker: "NDAQ", name: "Nasdaq" },
+  { ticker: "DJIA", name: "Dow Jones Industrial Average" },
+  { ticker: "SPX", name: "S&P 500 Index" },
+];
+
 app.get("/", (req, res) => {
-  res.render("index");
+  res.render("index", {
+    pageTitle: "Real Time Stocks",
+    stocks,
+  });
+});
+
+app.get("/stocks/:ticker", (req, res) => {
+  const { ticker } = req.params;
+
+  const { ticker: stockTicker, name } = stocks.filter(
+    (stock) => stock.ticker === ticker
+  )[0];
+
+  res.render("stock", {
+    pageTitle: name + " Stock",
+    stockName: name,
+    ticker: stockTicker,
+  });
 });
 
 io.on("connection", (socket) => {
   console.log("Connected");
+
+  const formatAsPrice = (val) => {
+    return val.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+  };
+
   const interval = setInterval(() => {
-    const ndaqStock = (Math.random() * 899999999).toFixed(2);
-    const djiaStock = (Math.random() * 899999999).toFixed(2);
-    const spxStock = (Math.random() * 899999999).toFixed(2);
+    const ndaqStock = formatAsPrice(Math.random() * 899999999);
+    const djiaStock = formatAsPrice(Math.random() * 899999999);
+    const spxStock = formatAsPrice(Math.random() * 899999999);
 
     socket.emit("price_update", {
       time: new Date().toLocaleDateString("en-us", {
